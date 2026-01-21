@@ -1,5 +1,6 @@
 package com.example.monpremierprojet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,14 +38,28 @@ public class MainActivity extends AppCompatActivity {
                 String messageUtilisateur = editText.getText().toString();
 
                 // 2. On affiche ce message dans le TextView
-                monTexte.setText(messageUtilisateur);
+//                monTexte.setText(messageUtilisateur);
 
                 // 3. On affiche un message toast
-                Toast.makeText(MainActivity.this, "Bravo, ça fonctionne !", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "Bravo, ça fonctionne !", Toast.LENGTH_SHORT).show();
 
+// 2. ON VERIFIE AVEC UN IF LA CONDITION DE SAISIE EST VIDE OU PAS
+                if (messageUtilisateur.isEmpty()) {
+                    // Si c'est vide (isEmpty), on affiche une alerte
+                    Toast.makeText(MainActivity.this, "Vous n'avez rien écrit !", Toast.LENGTH_SHORT).show();
+                } else {
+                    // SINON (si il y a du texte), on fait le travail normal
+                    monTexte.setText(messageUtilisateur);
+                    Toast.makeText(MainActivity.this, "Message modifié !", Toast.LENGTH_SHORT).show();
+
+                    // Changer de page
+                    Intent intent = new Intent(MainActivity.this, PageDeuxActivity.class);
+                    intent.putExtra("message", messageUtilisateur);
+                    startActivity(intent);
+                }
             }
         });
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvResultat), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
