@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.btnAction);
         EditText editText;
         editText = findViewById(R.id.etSaisie);
+        // Version Classique
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        // Version Lambda
+//        button.setOnClickListener(v -> {
+//            String messageUtilisateur = editText.getText().toString();
+//            monTexte.setText(messageUtilisateur);
+//            Toast.makeText(MainActivity.this, "Message modifié !", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, PageDeuxActivity.class);
+//            intent.putExtra("message", messageUtilisateur);
+//            startActivity(intent);
+//        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvResultat), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
